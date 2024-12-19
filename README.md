@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js + Contentful CMS
+
+A demonstration of integrating **Contentful CMS** with **Next.js 15**.
+
+## Features
+
+- ✅ [**Next.js 15**](https://nextjs.org/): Using **React 19** stable.
+- ✅ [**Contentful CMS**](https://www.contentful.com/): Headless CMS for content management.
+- ✅ **ESLint & Prettier**: Automated linting and formatting to maintain consistent code quality.
+- ✅ **GraphQL Codegen**: Automatically generates type-safe GraphQL queries.
+- 🚧 **SSG: Static Generation**: Statically generate pages at build time with **ISR** for **on-demand** revalidation.
+- 🚧 **Next.js Draft Mode**: Fetch unpublished content securely, bypassing static cache.
+- 🚧 **Contentful Live Preview & Inspection**: Real-time content preview updates and inspection directly from the CMS.
+- 🚧 **Pagination**: Efficiently fetch large amounts of data.
+- 🚧 **Nested Posts / References**: ...
 
 ## Getting Started
 
-First, run the development server:
+**1. Clone the Repository**
+
+```bash
+git clone https://github.com/blkhurst/next-cms-integration
+cd next-cms-integration
+npm install
+```
+
+**2. Generate Secrets for Draft Mode and Revalidation**
+
+```bash
+# Generates a token for your `.env.local` file
+openssl rand -base64 32 | tr -d "="
+```
+
+**3. Configure Environment Variables**
+
+Create a `.env.local` file and add your Contentful API keys.
+
+**4. Fetch and Generate Types**
+
+Use GraphQL Codegen to fetch the Contentful schema and generate type-safe queries:
+
+```bash
+# Outputs to lib/graphql/__generated__
+npm run codegen
+```
+
+**5. Run the Development Server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Contentful
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**1. Setup Contentful Content Model**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Field Name   | Field Type        | Notes                                |
+| ------------ | ----------------- | ------------------------------------ |
+| Title        | Short text        |                                      |
+| Slug         | Short text (slug) | Must be unique.                      |
+| Publish Date | Date (date only)  |                                      |
+| Cover Image  | Media (single)    |                                      |
+| Description  | Long text         |                                      |
+| Content      | Rich text         |                                      |
+| References   | References, many  | Only links to other **Post** entries |
 
-## Learn More
+**2. Configure Live Preview**
 
-To learn more about Next.js, take a look at the following resources:
+1. In the Contentful dashboard, navigate to **Settings > Content Preview > Create preview platform**.
+2. Under **Preview URL**, add the following URL, replacing `<token>` with your **Draft Mode Secret**:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+https://example.com/api/draft?slug={entry.fields.slug}&secret=<token>
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> **Note:** For local development, replace `https://example.com` with `http://localhost:3000`.
 
-## Deploy on Vercel
+**3. Configure Contentful's Webhook for Revalidation**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. In the Contentful dashboard, navigate to **Settings > Webhooks > Add Webhook**.
+2. Under `URL`, add the following:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# POST
+https://example.com/api/revalidate
+```
+
+3. Setup triggers for the following events:
+
+| Type  | Event                                                    |
+| ----- | -------------------------------------------------------- |
+| Entry | `Archive`, `Unarchive`, `Publish`, `Unpublish`, `Delete` |
+| Asset | `Archive`, `Unarchive`, `Publish`, `Unpublish`, `Delete` |
+
+4. "Add secret header", replacing `<token>` with your **Revalidation Secret**:
+
+```json
+{
+  "Key": "secret",
+  "Value": "<token>"
+}
+```
+
+5. Use a custom payload to send only the slug:
+
+```json
+{
+  "slug": "{ /payload/fields/slug/en-GB }"
+}
+```
+
+> **Note:** Replace en-GB for your default locale.
