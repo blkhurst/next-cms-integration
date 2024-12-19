@@ -1,0 +1,24 @@
+fragment PostContentFields on Post {
+  __typename
+  sys {
+    id
+  }
+  content {
+    json
+    links {
+      assets {
+        block {
+          ...ImageFields
+        }
+      }
+    }
+  }
+}
+
+query PostContent($slug: String!, $preview: Boolean) {
+  postCollection(limit: 1, where: { slug: $slug }, preview: $preview) {
+    items {
+      ...PostContentFields
+    }
+  }
+}
