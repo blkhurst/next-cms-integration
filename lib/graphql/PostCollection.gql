@@ -1,0 +1,17 @@
+query PostCollection(
+  $preview: Boolean
+  $limit: Int
+  $order: [PostOrder]
+  $where: PostFilter
+) {
+  postCollection(
+    limit: $limit
+    preview: $preview
+    order: $order
+    where: $where
+  ) {
+    items {
+      ...PostFields
+    }
+  }
+}
