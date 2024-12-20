@@ -13,6 +13,7 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "contentful": "^11.3.3",
     "graphql": "^16.9.0",
     "next": "15.1.0",
     "react": "^19.0.0",
