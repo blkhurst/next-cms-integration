@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/header";
 
-export const interVariable = localFont({
+const interVariable = localFont({
   src: "../assets/fonts/InterVariable.woff2",
   variable: "--font-inter",
   weight: "100 900",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={`${interVariable.variable} antialiased`}>
+        <Header />
         {children}
       </body>
     </html>

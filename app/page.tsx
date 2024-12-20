@@ -1,11 +1,17 @@
-import Image from "next/image";
+import PostItem from "@/components/post-item";
+import { fetchPosts } from "@/lib/fetchPost";
 
-export default function Home() {
+export default async function Page() {
+  const posts = await fetchPosts();
+
   return (
-    <main className="min-h-[100svh] flex flex-col justify-center items-center gap-8">
-        <h1 className="text-3xl font-medium">Copy Primary</h1>
-        <h1 className="text-copy-secondary text-3xl font-medium">Copy Secondary</h1>
-        <h1 className="text-copy-tertiary text-3xl font-medium">Copy Tertiary</h1>
+    <main className="max-w-container py-4">
+      <h1 className="mt-8 text-3xl font-semibold">Content</h1>
+      <ul className="mt-4 grid grid-cols-1 gap-3">
+        {posts.map((post) => {
+          return <PostItem key={post.sys.id} post={post} />;
+        })}
+      </ul>
     </main>
   );
 }
