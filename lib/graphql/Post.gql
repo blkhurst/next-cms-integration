@@ -3,6 +3,7 @@ fragment PostFields on Post {
   __typename
   sys {
     id
+    publishedAt
   }
   title
   slug
