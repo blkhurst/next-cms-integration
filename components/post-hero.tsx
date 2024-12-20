@@ -17,6 +17,7 @@ export default function PostHero({ post }: { post: PostFieldsFragment }) {
             src={post.coverImage?.url}
             fill
             style={{ objectFit: "cover" }}
+            priority
             alt={""}
           />
         </div>
