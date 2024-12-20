@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header";
+import DraftIndicator from "@/components/draft-indicator";
 
 const interVariable = localFont({
   src: "../assets/fonts/InterVariable.woff2",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={`${interVariable.variable} antialiased`}>
         <Header />
+        <DraftIndicator />
         {children}
       </body>
     </html>
