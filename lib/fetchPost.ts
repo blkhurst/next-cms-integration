@@ -47,6 +47,6 @@ export async function fetchPost(slug: string) {
 
   return {
     post: post.postCollection?.items[0],
-    content: postContent.postCollection?.items[0]?.content,
+    postContent: postContent.postCollection?.items[0],
   };
 }
