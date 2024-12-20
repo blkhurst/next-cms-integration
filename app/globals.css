@@ -22,7 +22,7 @@
 
 @layer base {
   * {
-    @apply border-border 
+    @apply border-border;
   }
 
   body {
@@ -34,5 +34,48 @@
   .max-w-container {
     @apply mx-auto w-full px-5;
     max-width: 68rem;
+  }
+
+  .prose {
+    @apply mx-auto max-w-4xl px-5;
+
+    h1,
+    h2 {
+      @apply mt-11 text-4xl;
+    }
+
+    h3,
+    h4 {
+      @apply mt-11 text-3xl font-normal;
+    }
+
+    h5,
+    h6 {
+      @apply mt-11 text-2xl font-normal;
+    }
+
+    p {
+      @apply mt-5 font-normal md:text-lg;
+    }
+
+    a {
+      @apply text-blue-500 underline;
+    }
+
+    ul {
+      @apply ml-5 list-disc font-bold md:text-lg;
+    }
+
+    ol {
+      @apply ml-5 list-decimal font-bold md:text-lg;
+    }
+
+    blockquote {
+      @apply border-l-4 pl-5 italic text-copy-secondary;
+    }
+
+    hr {
+      @apply my-10;
+    }
   }
 }
