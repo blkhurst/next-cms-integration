@@ -1,3 +1,19 @@
+fragment PostFields on Post {
+  # __typename and sys.id required for contentful livePreview
+  __typename
+  sys {
+    id
+    publishedAt
+  }
+  title
+  slug
+  publishDate
+  coverImage {
+    ...ImageFields
+  }
+  description
+}
+
 query PostCollection(
   $preview: Boolean
   $limit: Int

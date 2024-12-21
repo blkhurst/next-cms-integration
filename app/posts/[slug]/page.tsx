@@ -4,7 +4,7 @@ import PostHero from "@/components/post-hero";
 import PostContent from "@/components/post-content";
 
 export async function generateStaticParams() {
-  const posts = await fetchPosts(true);
+  const posts = await fetchPosts("delivery");
   return posts.map((post) => ({ slug: post.slug }));
 }
 

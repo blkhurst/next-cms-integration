@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { redirect } from "next/navigation";
 import { cookies, draftMode } from "next/headers";
-import { previewClient } from "@/lib/graphqlClient";
+import { fetchPost } from "@/lib/fetchPost";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -14,9 +14,8 @@ export async function GET(request: NextRequest) {
   }
 
   // Fetch the post using preview client
-  const postContent = await previewClient.Post({ slug: slug, preview: true });
-  const postSlug = postContent.postCollection?.items[0]?.slug
-  if (!postSlug) {
+  const { post } = await fetchPost(slug, "preview")
+  if (!post?.slug) {
     return new Response("Post does not exist.", { status: 400 });
   }
 
@@ -38,5 +37,5 @@ export async function GET(request: NextRequest) {
   }
 
   // Redirect to fetched post's slug to prevent open redirect vulnerabilities
-  redirect(`/posts/${postSlug}`);
+  redirect(`/posts/${post.slug}`);
 }
