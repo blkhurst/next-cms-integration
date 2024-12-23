@@ -25,12 +25,14 @@ export async function POST(request: Request) {
     }
 
     // Revalidate paths
-    revalidatePath("/");
-    revalidatePath(`/posts/${slug}`);
-    // Optionally, revalidate all paths
-    // revalidatePath("/", "layout");
+    const pathsToRevalidate = ["/", `/posts/${slug}`];
+    pathsToRevalidate.forEach((path) => {
+      revalidatePath(path);
+      // Optionally, revalidate all paths
+      // revalidatePath("/", "layout");
+    });
 
-    return new Response(JSON.stringify({ revalidated: true, path: slug }));
+    return new Response(JSON.stringify({ revalidated: true, paths: pathsToRevalidate }));
   } catch {
     return new Response(
       JSON.stringify({ revalidated: false, message: "Invalid request body" }),
