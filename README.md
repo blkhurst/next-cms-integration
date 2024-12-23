@@ -8,11 +8,8 @@ A demonstration of integrating **Contentful CMS** with **Next.js 15**.
 - ✅ [**Contentful CMS**](https://www.contentful.com/): Headless CMS for content management.
 - ✅ **ESLint & Prettier**: Automated linting and formatting to maintain consistent code quality.
 - ✅ **GraphQL Codegen**: Automatically generates type-safe GraphQL queries.
-- 🚧 **SSG: Static Generation**: Statically generate pages at build time with **ISR** for **on-demand** revalidation.
-- 🚧 **Next.js Draft Mode**: Fetch unpublished content securely, bypassing static cache.
-- 🚧 **Contentful Live Preview & Inspection**: Real-time content preview updates and inspection directly from the CMS.
-- 🚧 **Pagination**: Efficiently fetch large amounts of data.
-- 🚧 **Nested Posts / References**: ...
+- ✅ **Next.js Draft Mode**: Fetch unpublished content securely, bypassing static cache.
+- ✅ **ISR (Incremental Static Regeneration)**: Statically generate pages at build time, using **ISR** for **on-demand** revalidation, automated via a **Contentful webhook**.
 
 ## Getting Started
 
@@ -110,3 +107,22 @@ https://example.com/api/revalidate
 ```
 
 > **Note:** Replace en-GB for your default locale.
+
+## Misc
+
+### Testing Revalidation Webhook
+
+```bash
+curl -X POST \
+http://localhost:3000/api/revalidate \
+-H "Content-Type: application/json" \
+--data '{"slug": "<slug>"}' \
+-H 'secret: <token>' | jq
+```
+
+### Todo
+
+- 🚧 **Contentful Live Preview**: Real-time content preview updates directly from the CMS.
+- 🚧 **Pagination**: Efficiently fetch large amounts of data.
+- 🚧 **Nested Posts / References**: ...
+- 🚧 **Contentful Live Preview Inspection**: ...
