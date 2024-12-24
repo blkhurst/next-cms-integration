@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/header";
 import DraftIndicator from "@/components/draft-indicator";
+import { ContentfulPreviewProvider } from "@/components/contentful-preview-provider";
 
 const interVariable = localFont({
   src: "../assets/fonts/InterVariable.woff2",
@@ -25,7 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={`${interVariable.variable} antialiased`}>
         <Header />
         <DraftIndicator />
-        {children}
+        <ContentfulPreviewProvider>{children}</ContentfulPreviewProvider>
       </body>
     </html>
   );
