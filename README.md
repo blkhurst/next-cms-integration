@@ -10,6 +10,7 @@ A demonstration of integrating **Contentful CMS** with **Next.js 15**.
 - ✅ **GraphQL Codegen**: Automatically generates type-safe GraphQL queries.
 - ✅ **Next.js Draft Mode**: Fetch unpublished content securely, bypassing static cache.
 - ✅ **ISR (Incremental Static Regeneration)**: Statically generate pages at build time, using **ISR** for **on-demand** revalidation, automated via a **Contentful webhook**.
+- ✅ **Contentful Live Preview**: Real-time content preview updates directly from the CMS.
 
 ## Getting Started
 
@@ -122,7 +123,7 @@ http://localhost:3000/api/revalidate \
 
 ### Todo
 
-- 🚧 **Contentful Live Preview**: Real-time content preview updates directly from the CMS.
+- 🚧 **Custom Rich Text Components**: Rendering for media and embedded entries within Rich Text content.
 - 🚧 **Pagination**: Efficiently fetch large amounts of data.
-- 🚧 **Nested Posts / References**: ...
-- 🚧 **Contentful Live Preview Inspection**: ...
+- 🚧 **Nested Posts / References**: Support for hierarchical content structures.
+- 🚧 **Contentful Live Inspection**: Real-time content inspection tools.
