@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { PostContentFieldsFragment } from "@/lib/graphql/__generated__/sdk";
 import { useContentfulLiveUpdates } from "@contentful/live-preview/react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
