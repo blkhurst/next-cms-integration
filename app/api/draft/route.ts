@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   }
 
   // Fetch the post using preview client
-  const { post } = await fetchPost(slug, "preview")
+  const { post } = await fetchPost(slug, "preview");
   if (!post?.slug) {
     return new Response("Post does not exist.", { status: 400 });
   }

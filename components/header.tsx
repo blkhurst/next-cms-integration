@@ -22,7 +22,9 @@ export default function Header() {
           ))}
         </nav>
 
-        <Link href={"/"} className="font-bold">@Next CMS Integration</Link>
+        <Link href={"/"} className="font-bold">
+          @Next CMS Integration
+        </Link>
       </div>
     </header>
   );

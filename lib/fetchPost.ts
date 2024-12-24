@@ -53,7 +53,7 @@ export async function fetchPost(slug: string, mode: ClientMode = "auto") {
     where: { slug: slug },
     limit: 1,
   });
-  
+
   const postContent = await gqlClient.PostContent({
     slug: slug,
     preview: preview,

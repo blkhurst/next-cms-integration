@@ -1,7 +1,7 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 import dotenv from "dotenv";
 
-dotenv.config({path: [".env.local", ".env"]});
+dotenv.config({ path: [".env.local", ".env"] });
 
 const BASE_URL = "https://graphql.contentful.com/content/v1/spaces";
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID || "";

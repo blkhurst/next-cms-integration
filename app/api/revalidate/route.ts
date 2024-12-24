@@ -32,7 +32,9 @@ export async function POST(request: Request) {
       // revalidatePath("/", "layout");
     });
 
-    return new Response(JSON.stringify({ revalidated: true, paths: pathsToRevalidate }));
+    return new Response(
+      JSON.stringify({ revalidated: true, paths: pathsToRevalidate }),
+    );
   } catch {
     return new Response(
       JSON.stringify({ revalidated: false, message: "Invalid request body" }),
